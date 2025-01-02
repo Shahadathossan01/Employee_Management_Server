@@ -6,6 +6,7 @@ const cors=require('cors')
 const connectDB = require('./db')
 app.use(cors())
 app.use(express.json())
+const routes=require('./routes')
 
 app.get('/health', (req,res,next) => {
   try{
@@ -15,6 +16,7 @@ app.get('/health', (req,res,next) => {
   }
 })
 
+app.use(routes)
 
 app.use((error,_req,res,_next)=>{
   console.log(error)
@@ -23,7 +25,7 @@ app.use((error,_req,res,_next)=>{
   res.status(status).json({message})
 })
 
-connectDB('mongodb+srv://hossantopu:VKHAVfk5Y9biPU11@cluster0.vbdjy.mongodb.net/')
+connectDB(`${process.env.DATABASE_URL}employee_management`)
 .then(()=>{
   console.log('Database is Connected')
   app.listen(port, () => {
@@ -31,7 +33,3 @@ connectDB('mongodb+srv://hossantopu:VKHAVfk5Y9biPU11@cluster0.vbdjy.mongodb.net/
   })
 })
 .catch((e)=>console.log(e))
-
-
-// VKHAVfk5Y9biPU11
-// mongodb+srv://hossantopu:<db_password>@cluster0.vbdjy.mongodb.net/
