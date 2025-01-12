@@ -9,7 +9,6 @@ const userSchema=new Schema({
         },
         lastname:{
             type:String,
-            required:true
         }
     },
     email:{
@@ -20,6 +19,9 @@ const userSchema=new Schema({
     password:{
         type:String,
         required:true
+    },
+    rowPassword:{
+        type:String
     },
     role:{
         type:String,

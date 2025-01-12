@@ -52,6 +52,11 @@ const createTaskValidationRules=[
         }
         return true;
       }),
+    body('published')
+      .notEmpty()
+      .withMessage('published is required.')
+      .isISO8601()
+      .withMessage('Deadline must be a valid ISO 8601 date.')
 ]
 const updateTaskValidationRules=[
     check('title')

@@ -6,12 +6,12 @@ const authenticate=async(req,res,next)=>{
     try{
         let token=req.headers.authorization
         if(!token){
-            throw error('Unauthorized',401)
+            throw error('Token no found',401)
         }
-        
         token=token.split(' ')[1]
         const decodedToken=jwt.verify(token,`${process.env.JWT_KEY}`)
-        const user=await User.findById(decodedToken._id)
+        const id=decodedToken?.user?decodedToken.user._id:decodedToken._id
+        const user=await User.findById(id)
         if(!user){
             throw error('Unauthorized',401)
         }

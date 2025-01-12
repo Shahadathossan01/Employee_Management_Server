@@ -1,10 +1,11 @@
 const Task = require("../models/task.model")
 const User = require("../models/user.model")
 
-const taskCreateService=async({title,description,deadline,assignedTo,userId})=>{
+const taskCreateService=async({title,description,published,deadline,assignedTo,userId})=>{
     const task=await Task.create({
         title,
         description,
+        published,
         deadline,
         assignedTo
       })
@@ -20,11 +21,12 @@ const taskCreateService=async({title,description,deadline,assignedTo,userId})=>{
       return task;
 }
 
-const taskUpdateService=async({title,description,deadline,status,new_task,completed,failed,id})=>{
+const taskUpdateService=async({title,description,published,deadline,status,new_task,completed,failed,id})=>{
   const updatedTask=await Task.updateOne({_id:id},{
     $set:{
       title,
       description,
+      published,
       deadline,
       status,
       new_task,

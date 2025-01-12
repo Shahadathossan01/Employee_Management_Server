@@ -3,14 +3,14 @@ const { taskCreateService, taskUpdateService, taskDeleteService, taskGetAllServi
 const error = require("../utils/error")
 
 const taskCreateController=async(req,res,next)=>{
-    const {title,description,deadline,assignedTo}=req.body
+    const {title,description,published,deadline,assignedTo}=req.body
     const {errors}=validationResult(req)
     const userId=req.user._id
     if(errors.length !=0){
       return res.status(400).json(errors)
     }
     try{
-      const task=await taskCreateService({title,description,deadline,assignedTo,userId})
+      const task=await taskCreateService({title,description,published,deadline,assignedTo,userId})
       if(!task){
         throw error('task not create',500)
       }
@@ -23,7 +23,7 @@ const taskCreateController=async(req,res,next)=>{
 
 const taskUpdateController=async(req,res,next)=>{
   const {id}=req.params
-  const {title,description,deadline,status,new_task,completed,failed}=req.body
+  const {title,description,published,deadline,status,new_task,completed,failed}=req.body
   const {errors}=validationResult(req)
   if(errors.length !=0){
     return res.status(200).json(errors)

@@ -16,7 +16,8 @@ const registerService=async({username,email,password,role})=>{
           },
           email:email,
           password:password,
-          role:role
+          rowPassword:password,
+          role:role?role:"employee"
         })
         const salt=bcrypt.genSaltSync(10)
         const hash=bcrypt.hashSync(password,salt)
@@ -45,7 +46,7 @@ const loginService=async({email,password})=>{
       const token=jwt.sign(user._doc,`${process.env.JWT_KEY}`)
       return {token,user}
     }catch(e){
-        console.log(r)
+        console.log(e)
         throw error()
     }
 }

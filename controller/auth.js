@@ -1,5 +1,6 @@
 const {validationResult}=require('express-validator')
 const { registerService, loginService } = require('../service/auth')
+
 const registerController=async(req,res,next)=>{
     const {username,email,password,role}=req.body
     const {errors}=validationResult(req)
@@ -29,4 +30,4 @@ const loginController=async(req,res,next)=>{
   
   }
 
-  module.exports={registerController,loginController}
+module.exports={registerController,loginController}

@@ -10,6 +10,10 @@ const taskSchema=new Schema({
         type:String,
         required:true
     },
+    published:{
+        type:Date,
+        required:true
+    },
     deadline:{
         type:Date,
         required:true
@@ -21,7 +25,7 @@ const taskSchema=new Schema({
     },
     status:{
         type:String,
-        enum:['In Progress','Panding','Canceled'],
+        enum:['In Progress','Panding','Canceled','Completed'],
         default:'Panding'
     },
     new_task:{
@@ -37,7 +41,7 @@ const taskSchema=new Schema({
         default:false
     }
 
-})
+},{timestamps:true})
 
 const Task=model('Task',taskSchema)
 
